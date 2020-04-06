@@ -144,7 +144,7 @@ func (c *Card) CustomFields(boardCustomFields []*CustomField) map[string]interfa
 }
 
 // RemoveIDCustomField removes a custom field by ID from card
-func (c *Card) RemoveIDCustomField(customFieldID string) error {
+func (c *Card) RemoveIDCustomField(customFieldID string, customFieldItem *CustomFieldItem) error {
 	path := fmt.Sprintf("cards/%s/customField/%s/item", c.ID, customFieldID)
 	return c.client.Put(
 		path,
@@ -152,7 +152,7 @@ func (c *Card) RemoveIDCustomField(customFieldID string) error {
 			"idValue": "",
 			"value":   "",
 		},
-		&c,
+		customFieldItem,
 	)
 }
 
