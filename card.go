@@ -91,7 +91,6 @@ func (c *Card) CreatedAt() time.Time {
 	return t
 }
 
-
 // CustomFields returns the card's custom fields.
 func (c *Card) CustomFields(boardCustomFields []*CustomField) map[string]interface{} {
 
@@ -183,6 +182,19 @@ func (c *Card) AddIDLabel(labelID string) error {
 	path := fmt.Sprintf("cards/%s/idLabels", c.ID)
 	err := c.client.Post(path, Arguments{"value": labelID}, &c.IDLabels)
 	return err
+}
+
+// RemoveIDCustomField removes a custom field by ID
+func (c *Card) RemoveIDCustomField(customFieldID string) error {
+	path := fmt.Sprintf("cards/%s/customField/%s/item", c.ID, customFieldID)
+	return c.client.Put(
+		path,
+		Arguments{
+			"idValue": "",
+			"value":   "",
+		},
+		c,
+	)
 }
 
 // MoveToTopOfList moves the card to the top of it's list.
