@@ -192,8 +192,6 @@ func (c *Card) RemoveIDCustomField(customFieldID string) error {
 		Arguments{
 			"idValue": "",
 			"value":   "",
-			"key":     "",
-			"token":   "",
 		},
 		c,
 	)
