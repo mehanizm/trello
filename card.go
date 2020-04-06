@@ -186,7 +186,7 @@ func (c *Card) AddIDLabel(labelID string) error {
 
 // RemoveIDCustomField removes a custom field by ID
 func (c *Card) RemoveIDCustomField(customFieldID string) error {
-	path := fmt.Sprintf("card/%s/customField/%s/item", c.ID, customFieldID)
+	path := fmt.Sprintf("cards/%s/customField/%s/item", c.ID, customFieldID)
 	return c.client.Put(
 		path,
 		Arguments{
