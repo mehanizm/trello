@@ -89,6 +89,20 @@ func (c *Card) GetMembershipChangeActions() (actions ActionCollection, err error
 	return c.GetActions(Arguments{"filter": "addMemberToCard,removeMemberFromCard,updateCard:closed"})
 }
 
+// GetListCommentActions return only comment actions
+func (c *Card) GetListCommentActions() (actions ActionCollection, err error) {
+	return c.GetActions(Arguments{"filter": "commentCard"})
+}
+
+// GetLastCommentAction return only last comment action
+func (c *Card) GetLastCommentAction() (*Action, error) {
+	actions, err := c.GetActions(Arguments{"filter": "commentCard"})
+	if err != nil {
+		return nil, err
+	}
+	return actions.LastCommentAction(), nil
+}
+
 // DidCreateCard returns true if this action created a card, false otherwise.
 func (a *Action) DidCreateCard() bool {
 	switch a.Type {
@@ -140,6 +154,16 @@ func (a *Action) DidChangeCardMembership() bool {
 	case "addMemberToCard":
 		return true
 	case "removeMemberFromCard":
+		return true
+	default:
+		return false
+	}
+}
+
+// DidCommentCard returns true if card was commented
+func (a *Action) DidCommentCard() bool {
+	switch a.Type {
+	case "commentCard":
 		return true
 	default:
 		return false
