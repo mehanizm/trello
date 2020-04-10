@@ -89,23 +89,14 @@ func (c *Card) GetMembershipChangeActions() (actions ActionCollection, err error
 	return c.GetActions(Arguments{"filter": "addMemberToCard,removeMemberFromCard,updateCard:closed"})
 }
 
-<<<<<<< HEAD
-// GetListCommentActions return only comment actions
-func (c *Card) GetListCommentActions() (actions ActionCollection, err error) {
-=======
 // GetCommentActions return only comment actions
 func (c *Card) GetCommentActions() (actions ActionCollection, err error) {
->>>>>>> addGetLastCommentMethod
 	return c.GetActions(Arguments{"filter": "commentCard"})
 }
 
 // GetLastCommentAction return only last comment action
 func (c *Card) GetLastCommentAction() (*Action, error) {
-<<<<<<< HEAD
-	actions, err := c.GetActions(Arguments{"filter": "commentCard"})
-=======
 	actions, err := c.GetCommentActions()
->>>>>>> addGetLastCommentMethod
 	if err != nil {
 		return nil, err
 	}
